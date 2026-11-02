@@ -1,0 +1,33 @@
+Step 1: Open Thunder ClientClick the purple lightning bolt icon (⚡) on the far-left sidebar of VS Code.Click the "New Request" button. A clean testing tab will open in the center of your screen
+
+
+Step 2: Choose the HTTP Method (The Action):
+Click the dropdown menu on the far left of the URL bar and pick your action:
+GET: Use this when you want to fetch or view data from your server (e.g., getting all notes).
+POST: Use this when you want to send or save new data to your server (e.g., creating a user or adding a note).
+PUT: Use this when you want to update/edit existing data.
+DELETE: Use this when you want to remove data.
+
+
+
+Step 3: Enter the Request URL (The Destination):
+Type the address of your local server into the main input bar. It always follows this structure:http://localhost:PORT/YOUR-API-ENDPOINTExample: http://localhost:5000/api/auth/
+
+
+
+Step 4: Add Input Data (Only for POST / PUT)If you are sending data to the server, look at the horizontal tabs right below your URL bar:
+Click the Body tab.
+Select Json from the small sub-options.
+Type or paste your data inside curly braces using strict JSON format (double quotes around everything except numbers):
+
+
+
+Step 5: Click Send and Analyze the Response:
+Ensure your backend server is actually running in your terminal (npx nodemon), then click the blue Send button. Look at the right-hand panel that opens up:
+
+Status Box: Look at the HTTP status code:
+200 OK or 201 Created: Everything worked perfectly.
+400 Bad Request: Your JSON data has a typo or failed validation.
+404 Not Found: Your URL path is spelled wrong.500 Internal Server Error: Your backend code crashed. Check your VS Code terminal for errors.
+
+Response Body: This shows you exactly what your backend res.send() or res.json() code sent back to the client.

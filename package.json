@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "dev": "concurrently \"cd backend && npx nodemon index.js\" \"cd frontend1 && npm run dev\"",
+        "in terminal": "npm run dev will now run both frontend and backend simultaneously"
+    },
+    "dependencies": {
+        "concurrently": "^10.0.5"
+    }
+}

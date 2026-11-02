@@ -1,0 +1,668 @@
+/* ==========================================================================
+   iNotebook Main Styling
+   ========================================================================== */
+
+/* Layout & Container */
+.app-container {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
+
+.app-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border-color);
+  background-color: #ffffff;
+  padding: 1.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section (#head)
+   -------------------------------------------------------------------------- */
+#head {
+  margin-top: 40px;
+  margin-bottom: 45px;
+  text-align: center;
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, rgba(248, 250, 252, 0) 70%), #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+#head::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--primary-border);
+}
+
+#head h5 {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+}
+
+#head .card-header {
+  background: transparent;
+  border-bottom: none;
+  padding: 0;
+}
+
+#head .card-body {
+  padding: 0;
+}
+
+#head p {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+#head figcaption {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+#head figcaption cite {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* --------------------------------------------------------------------------
+   Feature Cards Section (#main)
+   -------------------------------------------------------------------------- */
+#main {
+  margin-bottom: 60px;
+}
+
+#main .card {
+  width: 100%;
+  max-width: 22rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+#main .card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: #cbd5e1;
+}
+
+.feature-img-wrapper {
+  height: 185px;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f8fafc 60%, #f1f5f9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-img-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.25), transparent);
+}
+
+.feature-img {
+  max-height: 140px;
+  max-width: 88%;
+  width: auto;
+  object-fit: contain !important;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#main .card:hover .feature-img {
+  transform: scale(1.06);
+}
+
+#main .card-body {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.feature-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--primary-border);
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.08);
+}
+
+#main .card-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+#main .card-text {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.925rem;
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Form Controls & Inputs
+   -------------------------------------------------------------------------- */
+.form-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #334155;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.form-control {
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.95rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: #ffffff;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3.5px rgba(79, 70, 229, 0.15);
+  outline: none;
+}
+
+.form-text {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.25rem;
+  font-size: 0.925rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn-primary {
+  background: var(--primary-gradient) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+  color: #ffffff !important;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: #f1f5f9 !important;
+  border: 1px solid var(--border-color) !important;
+  color: #475569 !important;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover, .btn-danger:focus {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+  color: #ffffff !important;
+}
+
+.btn-danger:active {
+  transform: translateY(0);
+}
+
+.btn-outline-danger {
+  color: var(--danger) !important;
+  border: 1.5px solid var(--danger-border) !important;
+  background-color: var(--danger-light) !important;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--danger) !important;
+  border-color: var(--danger) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  color: var(--primary) !important;
+  border: 1.5px solid var(--primary-border) !important;
+  background-color: var(--primary-light) !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   Auth Pages (Login & Signup)
+   -------------------------------------------------------------------------- */
+.auth-wrapper {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2.25rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary-gradient);
+}
+
+.auth-icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem auto;
+  font-size: 1.6rem;
+  border: 1px solid var(--primary-border);
+}
+
+.auth-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 0.35rem;
+}
+
+.auth-subtitle {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Add Note Component
+   -------------------------------------------------------------------------- */
+.add-note-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.add-note-card:focus-within {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+}
+
+.add-note-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.add-note-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.add-note-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-main);
+}
+
+/* --------------------------------------------------------------------------
+   Note Cards (NoteItem)
+   -------------------------------------------------------------------------- */
+.note-item-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.note-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: #cbd5e1;
+}
+
+.note-item-card .card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.note-tag-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.65rem;
+  width: fit-content;
+  letter-spacing: 0.01em;
+}
+
+.note-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.note-card-text {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex-grow: 1;
+  word-break: break-word;
+  white-space: pre-wrap;
+  margin-bottom: 1.25rem;
+}
+
+.note-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Empty State & Dashboard Header
+   -------------------------------------------------------------------------- */
+.dashboard-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.notes-count-badge {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--secondary-light);
+  color: var(--secondary-hover);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+}
+
+.empty-state-card {
+  background: #ffffff;
+  border: 2px dashed #cbd5e1;
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  margin: 1.5rem 0;
+  transition: var(--transition);
+}
+
+.empty-state-card:hover {
+  border-color: var(--primary);
+  background: #fbfbfe;
+}
+
+.empty-state-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state-text {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Bootstrap Modal Enhancements
+   -------------------------------------------------------------------------- */
+.modal-content {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-xl) !important;
+  overflow: hidden;
+}
+
+.modal-header {
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 1.25rem 1.5rem !important;
+}
+
+.modal-title {
+  font-weight: 700;
+  font-size: 1.25rem !important;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-body {
+  padding: 1.5rem !important;
+}
+
+.modal-footer {
+  background: #f8fafc;
+  border-top: 1px solid var(--border-color) !important;
+  padding: 1rem 1.5rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Alerts
+   -------------------------------------------------------------------------- */
+.custom-alert {
+  border-radius: var(--radius-md) !important;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: var(--shadow-md);
+  border-width: 1px !important;
+  animation: slideDownAlert 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.75rem 1.25rem !important;
+}
+
+@keyframes slideDownAlert {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  #head {
+    padding: 2rem 1rem;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  #head h5 {
+    font-size: 30px;
+  }
+
+  #head p {
+    font-size: 18px;
+  }
+
+  .auth-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-title {
+    font-size: 1.35rem;
+  }
+
+  .add-note-card {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #head h5 {
+    font-size: 26px;
+  }
+
+  #head p {
+    font-size: 16px;
+  }
+
+  .auth-card {
+    padding: 1.5rem 1rem;
+  }
+}

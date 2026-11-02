@@ -1,0 +1,11 @@
+[AddNote.js Form] 
+       │ 1. You type text and click "Add Note"
+       ▼
+[NoteState.js (addNote)] 
+       │ 2. Sends data to Database / pushes into `notes` state array
+       ▼
+[Notes.js] 
+       │ 3. Detects the `notes` state array changed, runs notes.map()
+       ▼
+[NoteItem.js] 
+       │ 4. Receives individual data and renders HTML on screen

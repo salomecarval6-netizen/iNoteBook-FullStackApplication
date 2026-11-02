@@ -1,0 +1,46 @@
+ The Core Hierarchy (How Data is Organized)Before clicking around, it helps to understand how MongoDB organizes things compared to a standard spreadsheet:
+
+Database: The main folder (e.g., news_application).
+
+Collection: A sub-folder or tab inside the database (e.g., articles, users).
+
+Document: An individual item inside that sub-folder (e.g., a single news article entry written in JSON format).
+
+
+
+Step 1: Connect to Your DatabaseLaunch MongoDB Compass.
+Click the green Connect button on the main screen (it automatically fills in your local computer's database address: mongodb://localhost:27017).
+
+
+Step 2: Create Your News Database
+To store your news articles, you need a dedicated space:
+
+Look at the left sidebar or the main panel and click the + (Plus) icon or the Create database button.
+
+A window will pop up asking for two names:Database Name: Type newsAppCollection Name: Type articles
+
+Click Create Database.
+
+You will now see newsApp appear in your left sidebar menu!
+
+
+Step 3: View, Add, and Edit News Data
+
+Click on your newly created articles collection in the sidebar to open the data room.
+
+How to Add Data Manually (For Testing)If you want to simulate a news article before your backend code is finished:
+
+Click the Add Data button in the main window and select Insert document.
+
+Change the view type to {} (JSON view) by clicking the little code brackets icon at the top right of the popup box.
+
+Paste a mock news article structure like this:json
+
+{
+  "title": "Breaking News Test",
+  "description": "This is a test article stored inside my MongoDB database!",
+  "author": "Admin"
+}
+
+
+Click Insert. You will instantly see your news item appear as a clean, visual card on the screen

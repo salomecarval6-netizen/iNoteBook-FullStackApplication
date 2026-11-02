@@ -1,0 +1,41 @@
+In Express, a router acts like a mini-routing machine or a traffic controller for your server.
+
+Without a router, if your app has 50 different pages or API endpoints, you have to write app.get(), app.post(), and app.delete() 50 times inside index.js. It gets impossible to manage.
+
+All User paths (/users/login, /users/register) go into a userRouter.js file.
+All Product paths (/products/all, /products/add) go into a productRouter.js file.
+
+How to Build and Use a Router:
+
+Step 1: Create the Router File (routes/userRoutes.js)
+const express = require('express');
+const router = express.Router(); // Create the router tool
+
+// Define your paths using 'router' instead of 'app'
+router.get('/profile', (req, res) => {
+    res.send("This is the user profile page");
+});
+
+router.get('/settings', (req, res) => {
+    res.send("This is the user settings page");
+});
+
+// Export it so index.js can see it
+module.exports = router;
+
+
+
+
+Step 2: Link the Router in Your Main File (index.js)
+const express = require('express');
+const app = express();
+
+// 1. Import your custom router file
+const userRoutes = require('./routes/userRoutes');
+
+// 2. Link it to a base path (prefix)
+app.use('/users', userRoutes); 
+
+app.listen(3000, () => console.log("Server running on port 3000"));
+
+
