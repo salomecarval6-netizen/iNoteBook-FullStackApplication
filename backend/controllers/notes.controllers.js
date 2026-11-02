@@ -16,11 +16,8 @@ const addNote = asyncHandler(async (req, res) => {
   const { title, description, tag } = req.body;
 
   // 2.Validate
-  if (!title?.trim() || !description?.trim()) {
-    throw new ApiError(400, "All Fields are required!!");
-  }
 
-  // DEPLOYMENT FIX: Validate input types and prevent excessively large note data.
+  // DEPLOYMENT FIX: Check input types before calling string methods such as trim().
   if (
     typeof title !== 'string' ||
     typeof description !== 'string' ||
@@ -29,8 +26,21 @@ const addNote = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid note data");
   }
 
-  if (title.trim().length > 150 || description.trim().length > 10000) {
-    throw new ApiError(400, "Title or description is too long");
+  if (!title.trim() || !description.trim()) {
+    throw new ApiError(400, "All Fields are required!!");
+  }
+
+  // DEPLOYMENT FIX: Match frontend validation and prevent oversized data.
+  if (title.trim().length < 3 || description.trim().length < 5) {
+    throw new ApiError(400, "Title must be at least 3 characters and description at least 5 characters");
+  }
+
+  if (
+    title.trim().length > 150 ||
+    description.trim().length > 10000 ||
+    (tag !== undefined && tag.trim().length > 50)
+  ) {
+    throw new ApiError(400, "Title, description, or tag is too long");
   }
 
   // here fetchuser is the middleware from which we are extracting the user_id so The userId variable inside controller must match the exact property name where your authentication middleware (i.e fetchuser) stores the decoded user payload on the req object.
@@ -123,7 +133,7 @@ const deleteNoteById = asyncHandler(async (req, res) => {
 
   Because req.user from the fetchuser middleware is a full Mongoose model instance, req.user._id returns a complex Mongoose ObjectID Wrapper Class, whereas your incoming URL path parameters contain a plain JavaScript String.
 
-  Thus It compares the raw ObjectID wrapper object to the string type. Because the structural data signatures don't match, MongoDB returns null and throws your 404 Invalid id screen crash.
+  Thus It compares the raw ObjectID wrapper object to the string type. Because the structural data signatures don't match, MongoDB returns null and throws you a 404 Invalid id screen crash.
   */
 
   const userId = req.user?._id?.toString();
@@ -139,9 +149,9 @@ const deleteNoteById = asyncHandler(async (req, res) => {
 
   // since findByIdAndDelete requires first argument as a raw object id thus {object} cant be passed
   const deletedNote = await Notes.findOneAndDelete({
-    _id: noteId,   // 1. "Target THIS specific note ID passed from the URL path"
+    _id: noteId,
     user: userId
-  });  // 2. "But ONLY if it belongs to the user ID extracted from the token header"
+  });
 
   if (!deletedNote) {
     throw new ApiError(404, "Invalid id");
@@ -155,7 +165,6 @@ const deleteNoteById = asyncHandler(async (req, res) => {
 
 const updateNote = asyncHandler(async (req, res) => {
   const { noteId } = req.params;
-
   const { title, description, tag } = req.body;
 
   // FIXED: Added .toString() to force conversion into a clean text string layout
@@ -170,19 +179,29 @@ const updateNote = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid note ID");
   }
 
-  // DEPLOYMENT FIX: Validate update fields before updating the database.
+  // DEPLOYMENT FIX: Validate update fields before calling trim() or updating the database.
   if (
-    !title?.trim() ||
-    !description?.trim() ||
     typeof title !== 'string' ||
     typeof description !== 'string' ||
     (tag !== undefined && typeof tag !== 'string')
   ) {
+    throw new ApiError(400, "Invalid note data");
+  }
+
+  if (!title.trim() || !description.trim()) {
     throw new ApiError(400, "Valid title and description are required");
   }
 
-  if (title.trim().length > 150 || description.trim().length > 10000) {
-    throw new ApiError(400, "Title or description is too long");
+  if (title.trim().length < 3 || description.trim().length < 5) {
+    throw new ApiError(400, "Title must be at least 3 characters and description at least 5 characters");
+  }
+
+  if (
+    title.trim().length > 150 ||
+    description.trim().length > 10000 ||
+    (tag !== undefined && tag.trim().length > 50)
+  ) {
+    throw new ApiError(400, "Title, description, or tag is too long");
   }
 
   const updatedNote = await Notes.findOneAndUpdate(
