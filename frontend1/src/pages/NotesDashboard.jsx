@@ -86,6 +86,19 @@ How it's triggered: Destructured out of context and executed at the very end of 
 {/*Step 2: The User Types the Changes */}
 // 2. THE MODAL OPENER: Runs the microsecond you click "Edit" on a note card
   const updateNote = (currentNote) => {
+
+
+    if (
+  typeof title !== 'string' ||
+  typeof description !== 'string' ||
+  (tag !== undefined && typeof tag !== 'string')
+) {
+  throw new ApiError(400, "Invalid note data");
+}
+
+if (!title.trim() || !description.trim()) {
+  throw new ApiError(400, "Valid title and description are required");
+}
     //A. Open the Bootstrap modal by clicking the hidden trigger button
     ref.current.click(); //Act exactly as if the user just moved their mouse cursor over this specific button and clicked 
 // B. Fill the modal form fields with the clicked note's existing text from MongoDB    

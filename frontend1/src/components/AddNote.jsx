@@ -14,6 +14,19 @@ const AddNote = (props) => {
   const handleClick= async (e)=>{
     e.preventDefault();//to prevent reloading of page
      // Safety check: Don't allow empty title or description submissions
+
+     if (
+  typeof title !== 'string' ||
+  typeof description !== 'string' ||
+  (tag !== undefined && typeof tag !== 'string')
+) {
+  throw new ApiError(400, "Invalid note data");
+}
+
+if (!title.trim() || !description.trim()) {
+  throw new ApiError(400, "All Fields are required!!");
+}
+
     if (note.title.trim().length < 3 || note.description.trim().length < 5) {
       props.showAlert("Title must be at least 3 characters and Description at least 5 characters", "danger");
       return;
