@@ -251,10 +251,10 @@
 }
 
 .btn-primary {
-  background: var(--primary-gradient) !important;
-  border: none !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+    background: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
 }
 
 .btn-primary:hover, .btn-primary:focus {
@@ -346,6 +346,7 @@
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
+  transform: translateY(-100px);
 }
 
 .auth-card::before {
@@ -358,19 +359,7 @@
   background: var(--primary-gradient);
 }
 
-.auth-icon-badge {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: var(--primary-light);
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.25rem auto;
-  font-size: 1.6rem;
-  border: 1px solid var(--primary-border);
-}
+
 
 .auth-title {
   font-size: 1.6rem;

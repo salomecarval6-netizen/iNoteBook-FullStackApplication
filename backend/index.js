@@ -14,14 +14,15 @@ import rateLimit from 'express-rate-limit'; // DEPLOYMENT FIX: Limits excessive 
 // npm i -D nodemon in terminal
 // npx nodemon index.js
 
-// DEPLOYMENT FIX: Configure CORS to allow only trusted frontend origins.
-// In production, CLIENT_URL should contain your deployed Vercel URL.
-// Multiple origins can be separated by commas.
+// FIX: Configure CORS to allow only trusted frontend origins.
+// Multiple origins due to different port number can be separated by commas.
 const allowedOrigins = (process.env.CLIENT_URL || '')
   .split(',')
   .map(origin => origin.trim())
   .filter(Boolean);
 
+  //CORS TELLS WHICH FRONTEND ORIGIN ARE ALLLOWED TO ACCESS BACKEND. 
+  //ORIGIN = PROTOCOL + DOMAIN + PORT NO
 // Allow localhost during development.
 if (process.env.NODE_ENV !== 'production') {
   allowedOrigins.push(
@@ -34,11 +35,12 @@ app.use(cors({
   origin: (origin, callback) => {
     // Allow requests without an Origin header (e.g. health checks).
     if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
+      return callback(null, true); //(no error, allow this origin)
     }
 
-    return callback(new Error('Not allowed by CORS'));
+    return callback(new Error('Not allowed by CORS')); //reject the origin
   },
+  credentials : true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'auth-token'],
 }));
@@ -74,7 +76,7 @@ const authLimiter = rateLimit({
 // With this line: Express intercepts the request, reads the raw text, converts it into a clean JavaScript object, and stuffs it into req.body so you can easily read it.
 app.use(express.json({ limit: '10kb' })); // DEPLOYMENT FIX: Limits JSON body size.
 
-// DEPLOYMENT FIX: Health endpoint used by hosting platforms to check server status.
+//FIX: Health endpoint used by hosting platforms to check server status.
 app.get('/health', (req, res) => {
   res.status(200).json({
     success: true,
@@ -107,7 +109,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// DEPLOYMENT FIX: Connect to MongoDB BEFORE starting the server.
+// FIX: Connect to MongoDB BEFORE starting the server.
 // This prevents the application from accepting API requests
 // when the database connection has failed.
 const startServer = async () => {

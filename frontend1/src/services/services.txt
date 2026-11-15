@@ -1,0 +1,8 @@
+This file "HANDLES COMMUNICATION BETWEEN FRONTEND AND BACKEND API'S"
+
+authService -> Authentication services 
+Contain all API calls related to user Authentication
+
+
+noteService -> Notes-related services
+Contain all api calls to manage notes

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../AuthContext.jsx";
 import NoteContext from './noteContext.jsx';
 
+import {getNotesAPI, addNoteAPI,deleteNoteAPI,editNoteAPI,getUserDetailsAPI} from "../../services/noteService.js";
+
 
 //Step 2: The Provider fills the pipe (The Water Pump) :
 //Inside your NoteState.jsx file, you create your live data states and functions, and you pass them into the .Provider's value property:
@@ -70,15 +72,7 @@ const NoteState = (props) =>{
 
       //Triggers a network request to your backend endpoint using fetch.
       //The await keyword stops code execution until the server replies.
-      const response = await fetch(`${host}/api/notes/getUserNotes`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          // Tells Express to expect JSON formatting
-          // Read the token right now, inside the function!
-          "auth-token": token
-        },
-      });
+      const response = await getNotesAPI(host, token);
 
       // DEPLOYMENT FIX: Handle an expired session before processing response data.
       if (response.status === 401) {
@@ -127,17 +121,7 @@ const NoteState = (props) =>{
         return false;
       }
 
-      const response = await fetch(`${host}/api/notes/addNote`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": token
-        },
-
-        //Converts your live JavaScript object fields into a flat text string
-        //so it can travel across a web connection safely
-        body: JSON.stringify({ title, description, tag }),
-      });
+      const response = await addNoteAPI(host, token, title, description, tag);
 
       if (response.status === 401) {
         handleUnauthorized();
@@ -186,13 +170,7 @@ Why no second function? There is no intermediate step! You do not need to fill o
 
       //fetch(): Triggers a network request across the internet to your Node.js/Express api.
       //${host}/api/notes/deleteNoteById/${id}: Uses string interpolation to stitch your backend server port URL to your dynamic endpoint, passing the exact note ID straight through the URL path parameters.
-      const response = await fetch(`${host}/api/notes/deleteNoteById/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": token
-        },
-      });
+      const response = await deleteNoteAPI(host, token, id);
 
       if (response.status === 401) {
         handleUnauthorized();
@@ -249,17 +227,7 @@ Step 2 (editNote): The application must now wait for you to finish typing. Only 
         return false;
       }
 
-      const response = await fetch(`${host}/api/notes/updateNote/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": token
-        },
-
-        // Turns your fresh frontend JavaScript strings into JSON
-        // so they can safely travel over HTTP to your backend server.
-        body: JSON.stringify({ title, description, tag }),
-      });
+      const response = await editNoteAPI(host, token, id, title, description, tag);
 
       if (response.status === 401) {
         handleUnauthorized();
@@ -308,13 +276,7 @@ Step 2 (editNote): The application must now wait for you to finish typing. Only 
     }
 
     try {
-      const response = await fetch(`${host}/api/auth/getuser`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'auth-token': token
-        }
-      });
+      const response = await getUserDetailsAPI(host, token);
 
       if (response.status === 401) {
         handleUnauthorized();
@@ -339,7 +301,9 @@ Step 2 (editNote): The application must now wait for you to finish typing. Only 
 
 
   return(
-    // 2. This is where the empty pipe gets filled with real live data!
+    // STEP 2. This is where the empty pipe gets filled with real live data!
+
+    //.Provider => supplies the data
     <NoteContext.Provider value={{
       notes,
       addNote,
@@ -352,6 +316,7 @@ Step 2 (editNote): The application must now wait for you to finish typing. Only 
       setNotes
     }}>
       {props.children}
+      {/*Here, props.children renders it's child components from app.jsx .provider provides the value to this compoennets */}
 
       {/*props.children is a built-in React property used to capture and render whatever components, HTML elements, or text are placed between the opening and closing tags of a parent component.
       (Here, NoteContext). It acts like a dynamic layout placeholder, allowing a component to function as a generic wrapper or container. */}

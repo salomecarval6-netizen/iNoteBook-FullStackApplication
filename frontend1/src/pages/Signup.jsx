@@ -1,6 +1,9 @@
+// Signup.jsx
+
 import {useState, useContext} from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../context/AuthContext.jsx';
+import { signupUser } from '../services/authService.js';
 
 const Signup = (props) => {
     const navigate = useNavigate();
@@ -35,15 +38,7 @@ const Signup = (props) => {
         try{
             setLoading(true);
 
-            const host = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
-
-            const response = await fetch(`${host}/api/auth/createuser`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({name,email,password})
-            });
+            const response = await signupUser({name,email,password});
 
             const json = await response.json();
             console.log(json);
@@ -74,7 +69,6 @@ const Signup = (props) => {
     return (
       <div className="auth-wrapper">
         <div className="auth-card">
-          <div className="auth-icon-badge">✨</div>
           <h2 className="auth-title">Create an account to use iNotebook</h2>
           <p className="auth-subtitle">Start organizing your thoughts and ideas today</p>
 
@@ -191,4 +185,4 @@ const Signup = (props) => {
     )
 }
 
-export default Signup
+export default Signup;

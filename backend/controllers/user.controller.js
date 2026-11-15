@@ -24,18 +24,17 @@ const createUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All Fields are required!!");
   }
 
-  // DEPLOYMENT FIX: Normalize email so uppercase/lowercase variations
-  // do not accidentally create separate accounts.
+  // FIX: Normalize email so uppercase/lowercase variations do not accidentally create separate accounts.
   const normalizedEmail = email.trim().toLowerCase();
 
-  // DEPLOYMENT FIX: Basic email format validation.
+  // FIX: Basic email format validation.
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailRegex.test(normalizedEmail)) {
     throw new ApiError(400, "Please enter a valid email address");
   }
 
-  // DEPLOYMENT FIX: Enforce reasonable input limits.
+  // FIX: Enforce reasonable input limits.
   if (name.trim().length > 100 || password.length < 8 || password.length > 128) {
     throw new ApiError(400, "Name or password does not meet the required limits");
   }
@@ -82,7 +81,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const { email, password } = req.body;
 
-  // DEPLOYMENT FIX: Validate login input before querying the database.
+  //FIX: Validate login input before querying the database.
   if (
     typeof email !== 'string' ||
     typeof password !== 'string' ||
@@ -92,7 +91,7 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Email and password are required");
   }
 
-  // DEPLOYMENT FIX: Use the same email normalization as signup.
+  //FIX: Use the same email normalization as signup.
   const normalizedEmail = email.trim().toLowerCase();
 
   const user = await User.findOne({ email: normalizedEmail });
@@ -142,12 +141,12 @@ const getUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid Id");
   }
 
-  // DEPLOYMENT FIX:
+  //FIX:
   // Exclude password from the database result itself.
   // Never send password hashes to the frontend.
   const user = await User.findById(userId).select("-password");
 
-  // DEPLOYMENT FIX: Handle deleted/non-existing users.
+  //  FIX: Handle deleted/non-existing users.
   if (!user) {
     throw new ApiError(404, "User not found");
   }

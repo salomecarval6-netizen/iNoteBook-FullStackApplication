@@ -34,7 +34,7 @@ const showAlert=(message,type)=>{
   return (
     <>
   {/*Router MUST be the top parent layer so Context can use hooks */}
-   <Router>
+  <Router>
   <AuthProvider>
   <NoteState>
     <div className="app-container">

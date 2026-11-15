@@ -9,7 +9,7 @@ const generateJWT = (user) => {
     }
   };
 
-  // DEPLOYMENT FIX:
+  //FIX:
   // Never use a hardcoded fallback JWT secret.
   // The secret must be configured through backend environment variables.
   const JWT_SECRET = process.env.JWT_SECRET;

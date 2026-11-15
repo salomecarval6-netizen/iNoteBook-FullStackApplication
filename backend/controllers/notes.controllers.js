@@ -17,7 +17,7 @@ const addNote = asyncHandler(async (req, res) => {
 
   // 2.Validate
 
-  // DEPLOYMENT FIX: Check input types before calling string methods such as trim().
+  // FIX: Check input types before calling string methods such as trim().
   if (
     typeof title !== 'string' ||
     typeof description !== 'string' ||
@@ -30,7 +30,7 @@ const addNote = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All Fields are required!!");
   }
 
-  // DEPLOYMENT FIX: Match frontend validation and prevent oversized data.
+  // FIX: Match frontend validation and prevent oversized data.
   if (title.trim().length < 3 || description.trim().length < 5) {
     throw new ApiError(400, "Title must be at least 3 characters and description at least 5 characters");
   }
