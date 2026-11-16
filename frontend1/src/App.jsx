@@ -41,7 +41,7 @@ const showAlert=(message,type)=>{
     <NavBar/>
  {/* ⬇️ THIS ENTIRE CHUNK BECOMES props.children ⬇️ */} 
  {/*This div is given since alert was chnaging tha layout of screen when t was appearning and siappearing so gave a fixed size to the alert */}
- <div className="container" style={{ height: "55px", marginBottom: "5px" }}>
+<div className="alert-region" >
 <Alert alert={alert}/>
  </div>
    

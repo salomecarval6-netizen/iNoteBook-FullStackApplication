@@ -26,7 +26,7 @@ const allowedOrigins = (process.env.CLIENT_URL || '')
 // Allow localhost during development.
 if (process.env.NODE_ENV !== 'production') {
   allowedOrigins.push(
-    'http://localhost:5173',
+    'http://localhost:4173',
     'http://localhost:3000'
   );
 }

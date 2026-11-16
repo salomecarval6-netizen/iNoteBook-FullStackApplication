@@ -65,7 +65,7 @@ const Login = (props) => {
       }  
       } catch (error) {
          console.error("Login process failed:", error);
-         alert("Server connection error. Please try again later.");
+         props.showAlert("Server connection error. Please try again later.", "danger");
       } finally {
          setLoading(false);
       }
